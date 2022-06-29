@@ -8,14 +8,16 @@ import NotFound from "../pages/NotFound";
 
 function App() {
   return (
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route>
-          <NotFound />
-        </Route>
-      </Switch>
-    </ConnectedRouter>
+    <>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </ConnectedRouter>
+    </>
   );
 }
 export default App;

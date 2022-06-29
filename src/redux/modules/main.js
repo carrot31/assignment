@@ -152,22 +152,22 @@ const editPhotoDB = (formData) => {
 //reducer
 export default handleActions(
   {
-    [LOG_IN]: (state, action) =>
-      produce(state, (draft) => {
-        draft.token = action.payload.token;
-        draft.userInfo = action.payload.user;
-        draft.is_login = true;
-      }),
-    [LOG_OUT]: (state, action) => produce(state, (draft) => {}),
-    [GET_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_login = true;
-        draft.userInfo = action.payload.userInfo;
-      }),
-    [ADD_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.userInfo.push(action.payload);
-      }),
+    // [LOG_IN]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.token = action.payload.token;
+    //     draft.userInfo = action.payload.user;
+    //     draft.is_login = true;
+    //   }),
+    // [LOG_OUT]: (state, action) => produce(state, (draft) => {}),
+    // [GET_USER]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.is_login = true;
+    //     draft.userInfo = action.payload.userInfo;
+    //   }),
+    // [ADD_USER]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.userInfo.push(action.payload);
+    //   }),
     [ADD_PHOTO]: (state, action) =>
       produce(state, (draft) => {
         draft.userInfo.userImg = action.payload.userImg;
