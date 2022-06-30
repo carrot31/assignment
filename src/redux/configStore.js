@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 import todo from "./modules/todo";
+import color from "./modules/color";
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   todo: todo,
+  color: color,
   router: connectRouter(history),
 });
 

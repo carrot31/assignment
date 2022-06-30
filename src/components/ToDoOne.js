@@ -12,6 +12,10 @@ const ToDoOne = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isOpen2, setIsOpen2] = React.useState(false);
 
+  //수정 state 값
+  const [edit, setEdit] = React.useState();
+  console.log(edit);
+
   //todoList 삭제
   const deleteList = () => {
     dispatch(todoActions.deleteList(props.value));
@@ -19,7 +23,8 @@ const ToDoOne = (props) => {
 
   //todoList 수정
   const editList = () => {
-    dispatch(todoActions.editList(props.value));
+    dispatch(todoActions.editList(edit));
+    setIsOpen(false);
   };
 
   return (
@@ -27,30 +32,36 @@ const ToDoOne = (props) => {
       {/* 번호 */}
       <Number>{props.number + 1}.</Number>
       {/* todoList */}
-      <Text>{props.value}</Text>
+      <Text>{edit ? edit : props.value}</Text>
       {/* 수정 & 삭제 버튼 */}
       <BtnBox>
-        <Btn onClick={editList}>Edit</Btn>
-        {/* 수정 모달폼 */}
-        <Modal open={isOpen}>
-          <ModalData
-            Edit
-            onClose={() => setIsOpen(false)}
-            text="100글자 이하로 작성해주세요!"
-          />
-        </Modal>
+        <Btn onClick={() => setIsOpen(true)}>Edit</Btn>
         <Btn onClick={() => setIsOpen2(true)}>Delete</Btn>
-        {/* 삭제 모달폼 */}
-        <Modal open={isOpen2}>
-          <ModalData
-            Delete
-            onClose={() => setIsOpen2(false)}
-            action={() => {
-              deleteList();
-            }}
-          />
-        </Modal>
       </BtnBox>
+      {/* 수정 모달폼 */}
+      <Modal open={isOpen}>
+        <ModalData
+          Edit
+          onClose={() => setIsOpen(false)}
+          _value={(e) => {
+            setEdit(e.target.value);
+          }}
+          action={() => {
+            editList();
+          }}
+          text={props.value}
+        />
+      </Modal>
+      {/* 삭제 모달폼 */}
+      <Modal open={isOpen2}>
+        <ModalData
+          Delete
+          onClose={() => setIsOpen2(false)}
+          action={() => {
+            deleteList();
+          }}
+        />
+      </Modal>
     </Container>
   );
 };

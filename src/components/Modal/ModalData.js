@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ModalData = (props) => {
-  const { Delete, Edit, action, onClose } = props;
+  const { Delete, Edit, onClose, action, text, _value } = props;
 
   //삭제 확인 창
   if (Delete) {
@@ -26,15 +26,12 @@ const ModalData = (props) => {
   if (Edit) {
     return (
       <Container>
-        {/* 삭제 확인 메세지 */}
-        <Text>
-          정말 <br />
-          삭제하시겠습니까?
-        </Text>
-        {/* 취소 & 삭제 버튼 */}
+        {/* 수정 */}
+        <input onChange={_value} />
+        {/* 취소 & 수정 버튼 */}
         <BtnBox>
           <Btn onClick={onClose}>취소</Btn>
-          <Btn onClick={action}>삭제</Btn>
+          <Btn onClick={action}>수정</Btn>
         </BtnBox>
       </Container>
     );
@@ -56,6 +53,13 @@ const Text = styled.div`
   font-size: 1.2rem;
   text-align: center;
 `;
+
+const Input = styled.input`
+  value
+  font-size: 1.2rem;
+  text-align: center;
+`;
+
 const BtnBox = styled.div`
   display: flex;
   flex-direction: row;

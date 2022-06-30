@@ -37,7 +37,9 @@ export default handleActions(
       }),
     [EDIT_LIST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = { ...draft.list, ...action.payload.edit };
+        let idx = draft.list.findIndex((p) => p.id === action.payload.edit); //인덱스 반환 => 딱 위치만 찾는 함수
+        console.log(idx);
+        draft.list[idx] = action.payload.edit;
       }),
   },
   initialState
