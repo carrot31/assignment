@@ -1,70 +1,11 @@
-# Getting Started with Create React App
+# React란?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React란 SPA를 위한 사용자의 인터페이스를 구축하는 데 사용되는 UI 라이브러리입니다. 가상돔, 단방향 데이터 바인딩, JSX 문법 사용 등의 특징을 가지고 있는데 그 중 특히, React는 직접적으로 돔을 건드리지 않고 가상돔을 사용해 변경된 부분만 실제돔에 반영하기에 효율성과 속도감이 좋습니다. 뿐만아니라 Component 단위의 작성으로 재사용이 뛰어나며 이를 통해 개발 생산성을 향상시키고 테스트를 하기에도 쉬워 유지보수에도 크게 도움이 됩니다. 그 외에도 React Native를 통해 쉽게 모바일 애플리케이션을 빌드할 수도 있습니다.
 
-## Available Scripts
+## React의 lifecycle
 
-In the project directory, you can run:
+위에서 언급한 바와 같이 React는 Component 기반의 view중심 라이브러리입니다. 그렇기에 각각의 컴포넌트가 import되어 Dom을 형성하고(Mount) 내부를 수정하고(Update) 마지막으로 사라지는(Unmount) 과정을 겪게 되는데 이 과정을 라이프 사이클이라고 합니다. Mount는 보다 정확히 말하자면 리액트로 만들어진 웹페이지를 방문해 브라우저에 HTML이 나타나기 까지의 과정을 말하며 constructor, render, componeneDidMount등을 통해 처음으로 렌더링 됩니다. Update는 컴포넌트가 가지고 있는 props 혹은 state가 변경 될 때 수행되며 render와 componentDidUpdate를 통해 동작하게 됩니다. 마지막으로 Unmount는 컴포넌트가 화면에서 사라지기 직전에 호출되는데 componentWillUnmount를 통해 이루어지며 앞선 과정 중 componentDidMount에서 등록한 이벤트를 제거해줍니다. 이러한 라이프사이클은 클래스형에서만 적용이 되었다가 React 16.8버전 이후 함수형에서도 useEffect()와 같이 React Hook을 통해 적용이 가능해지게 됩니다.
 
-### `yarn start`
+# 상태관리란?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+상태관리란 사용자에게 보여줄 정보 혹은 애플리케이션 내에서 사용할 정보들의 상태를 관리하는 것을 말합니다. 여러개의 컴포넌트들이 데이터를 공유하며 상호작용하는데 데이터가 변할때 마다 관련된 Dom을 찾는다면 불필요한 접근이 많아지게 됩니다. 이러한 점을 방지해주기 위해 상태관리를 해주게 됩니다. 즉, 데이터가 바뀌어도 페이지가 렌더링 되지 않도록 도와주고 또한 컴포넌트간의 데이터를 전달하다 보면 props drilling이 많아지게 디고 문제 발생 지점을 찾기 어려워지기에 상태관리를 해주어야 합니다. 대표적인 상태관리 라이브러리로는 Redux와 Recoil, Mobx등이 있습니다.

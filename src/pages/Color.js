@@ -22,8 +22,8 @@ const Color = () => {
       <ColorBox>
         {colorList.map((v, i) => {
           return (
-            <div>
-              <ColorOne key={v + i} value={v} />
+            <div key={v + i}>
+              <ColorOne value={v} />
             </div>
           );
         })}
