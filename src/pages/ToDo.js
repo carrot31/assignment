@@ -9,43 +9,29 @@ const ToDo = () => {
 
   //전역저장소에서 todoList 데이터 가져오기
   const todoList = useSelector((state) => state.todo.list);
-  console.log(todoList);
 
   //todo state값 선언
-  const [text, setText] = React.useState();
+  const [text, setText] = React.useState("");
 
   //todo state 입력값
   const writeText = (e) => {
+    //글자 수 제한
+    if (e.target.value.length >= 80) {
+      alert("80자 이하로 작성해주세요.");
+      e.target.value = e.target.value.substr(0, 80);
+    }
     setText(e.target.value);
   };
 
-  //todoList 추가
+  //todoList 추가 & input창 초기화
   const addList = () => {
     if (text === "" || text === undefined) {
-      alert("할일을 작성해주세요!");
+      alert("내용을 입력해주세요!");
     } else {
       dispatch(todoActions.addList(text));
-      return text === "";
+      setText("");
     }
   };
-
-  //Enter누를 시 todoList 추가
-  React.useEffect(() => {
-    const press = (e) => {
-      if (e.key === "Enter") {
-        if (text === "" || text === undefined) {
-          alert("할일을 작성해주세요!");
-        } else {
-          dispatch(todoActions.addList(text));
-        }
-      }
-    };
-    window.addEventListener("keydown", press);
-
-    return () => {
-      window.removeEventListener("keydown", press);
-    };
-  }, []);
 
   return (
     <Container>
@@ -53,7 +39,7 @@ const ToDo = () => {
       <Title>ToDo-List</Title>
       {/* 작성칸 */}
       <Content>
-        <Write autoFocus onChange={writeText} />
+        <Write autoFocus onChange={writeText} value={text} />
         <AddBtn onClick={addList}>ADD</AddBtn>
       </Content>
       {/* 할일 리스트 */}
@@ -69,11 +55,9 @@ const ToDo = () => {
 export default ToDo;
 
 const Container = styled.div`
-  max-width: 500px;
-  height: 90vh;
-  margin: 30px auto;
-  padding: 20px;
-  background: skyblue;
+  height: 100vh;
+  padding: 50px;
+  background: #ddd;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,40 +66,42 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 3rem;
-  margin-bottom: 10%;
 `;
 
 const Content = styled.div`
-  width: 400px;
-  height: 5vh;
-  background: red;
+  width: 60vw;
+  height: 8vh;
   margin-top: 5%;
   padding: 10px;
   display: flex;
   justify-content: space-between;
 `;
 
-const Write = styled.input.attrs({ placeholder: "내용을 입력해 주세요." })`
-  width: 300px;
-  height: 3vh;
-  padding: 5px;
+const Write = styled.input.attrs({
+  placeholder: "오늘의 할 일을 입력해 주세요.",
+})`
+  width: 60vw;
+  height: 6vh;
+  padding: 5px 15px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid black;
 `;
 
 const AddBtn = styled.button`
-  width: 100px;
-  height: 3vh;
+  width: 10vw;
+  height: 6vh;
   margin-left: 3%;
+  font-size: 1.5rem;
+  font-weight: bold;
 `;
 
 const ListBox = styled.div`
-  width: 400px;
-  height: 50vh;
+  width: 59vw;
+  height: 60vh;
   padding: 20px;
-  margin-top: 10%;
-  background-color: yellow;
+  margin-top: 3%;
+  background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
 `;
-
-const List = styled.h3``;

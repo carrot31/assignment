@@ -5,7 +5,6 @@ import axios from "axios";
 
 //Actions
 const GET_COLOR = "GET_COLOR";
-// const DELETE_LIST = "DELETE_LIST";
 
 //Action Creators
 const getColor = createAction(GET_COLOR, (color) => ({

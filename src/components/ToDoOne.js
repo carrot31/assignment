@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as todoActions } from "../redux/modules/todo";
 import Modal from "../components/Modal/Modal"; //모달 창
 import ModalData from "../components/Modal/ModalData";
@@ -13,8 +13,7 @@ const ToDoOne = (props) => {
   const [isOpen2, setIsOpen2] = React.useState(false);
 
   //수정 state 값
-  const [edit, setEdit] = React.useState();
-  console.log(edit);
+  const [edit, setEdit] = React.useState(props.value ? props.value : "");
 
   //todoList 삭제
   const deleteList = () => {
@@ -29,10 +28,10 @@ const ToDoOne = (props) => {
 
   return (
     <Container>
-      {/* 번호 */}
-      <Number>{props.number + 1}.</Number>
-      {/* todoList */}
-      <Text>{edit ? edit : props.value}</Text>
+      {/* 번호 & todoList */}
+      <Text>
+        {props.number + 1}. {edit ? edit : props.value}
+      </Text>
       {/* 수정 & 삭제 버튼 */}
       <BtnBox>
         <Btn onClick={() => setIsOpen(true)}>Edit</Btn>
@@ -43,7 +42,8 @@ const ToDoOne = (props) => {
         <ModalData
           Edit
           onClose={() => setIsOpen(false)}
-          _value={(e) => {
+          value={edit}
+          setValue={(e) => {
             setEdit(e.target.value);
           }}
           action={() => {
@@ -69,9 +69,8 @@ const ToDoOne = (props) => {
 export default ToDoOne;
 
 const Container = styled.div`
-  width: 350px;
+  width: 55vw;
   height: 50px;
-  background: green;
   padding: 5px;
   margin: 5px 0px;
   display: flex;
@@ -80,14 +79,15 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Number = styled.h3``;
 const Text = styled.h3`
   margin-left: -10px;
 `;
 
 const BtnBox = styled.div``;
 const Btn = styled.button`
-  width: 50px;
+  width: 80px;
   height: 30px;
   margin: 0px 3px;
+  font-size: 1.1rem;
+  font-weight: bold;
 `;

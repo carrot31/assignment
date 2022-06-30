@@ -1,20 +1,38 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
-const NotFouund = (props) => {
+const NotFound = (props) => {
   const history = useHistory();
   return (
-    <>
-      <h1>주소가 올바르지 않아요.</h1>
-      <button
+    <Container>
+      <Text>주소가 올바르지 않습니다.</Text>
+      <Btn
         onClick={() => {
           history.goBack();
         }}
       >
         뒤로가기
-      </button>
-    </>
+      </Btn>
+    </Container>
   );
 };
 
-export default NotFouund;
+export default NotFound;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Text = styled.h1`
+  font-weight: bold;
+  margin-top: 300px;
+`;
+
+const Btn = styled.button`
+  margin-top: 30px;
+  font-size: 2rem;
+`;
